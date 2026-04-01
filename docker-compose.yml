@@ -1,0 +1,15 @@
+services:
+  ledger:
+    image: ghcr.io/stockyard-dev/stockyard-ledger:latest
+    ports:
+      - "8920:8920"
+    environment:
+      - PORT=${STOCKYARD_PORT:-8920}
+      - DATA_DIR=${STOCKYARD_DATA_DIR:-/data}
+      - LEDGER_LICENSE_KEY=${STOCKYARD_LEDGER_LICENSE_KEY:-}
+    volumes:
+      - ledger-data:/data
+    restart: unless-stopped
+volumes:
+  ledger-data:
+    driver: local
